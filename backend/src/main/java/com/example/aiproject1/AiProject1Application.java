@@ -1,5 +1,6 @@
 package com.example.aiproject1;
 
+import com.example.aiproject1.ollama.OllamaService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +17,11 @@ public class AiProject1Application {
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
+    }
+
+    @Bean
+    public OllamaService ollamaService() {
+        return new OllamaService();
     }
 
 }

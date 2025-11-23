@@ -1,5 +1,6 @@
 package com.example.aiproject1.summary;
 
+import com.example.aiproject1.ollama.OllamaService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

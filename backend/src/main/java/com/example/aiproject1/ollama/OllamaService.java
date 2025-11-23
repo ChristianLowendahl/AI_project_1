@@ -1,4 +1,4 @@
-package com.example.aiproject1.summary;
+package com.example.aiproject1.ollama;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,11 +16,23 @@ public class OllamaService {
     private final ObjectMapper objectMapper = new ObjectMapper();
     private static final String OLLAMA_URL = "http://localhost:11434/api/generate";
 
+
     public String summarize(String text) {
+        String systemPrompt = "Summarize the following text into 1-3 three bullet points with one sentence each:";
+        return handleText(systemPrompt, text);
+    }
+
+    public String generateQuestions(String text) {
+        String systemPrompt = "Generate two short questions based on the following text:";
+        return handleText(systemPrompt, text);
+    }
+
+
+    private String handleText(String SystemPrompt, String userText) {
         try {
             Map<String, Object> request = Map.of(
                     "model", "qwen2.5:3b",
-                    "prompt", "Summarize the following text into bullet points:\n\n" + text,
+                    "prompt", SystemPrompt + "\n\n" + userText,
                     "stream", true
             );
 
@@ -58,6 +70,5 @@ public class OllamaService {
             throw new RuntimeException("Error calling Ollama API: " + e.getMessage(), e);
         }
     }
-
 
 }
