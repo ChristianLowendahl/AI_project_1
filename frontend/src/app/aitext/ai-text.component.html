@@ -1,0 +1,37 @@
+<div style="max-width: 700px; margin: auto; padding: 20px;">
+  <h2>AI Text Tools</h2>
+
+  <div style="margin-bottom:10px; display:flex; gap:8px; align-items:center;">
+    <label for="action" style="font-weight:600;">Action:</label>
+    <select id="action" [(ngModel)]="selected" style="padding:6px;">
+      <option value="summary">Summarize</option>
+      <option value="questions">Generate questions</option>
+      <option value="content">Generate content</option>
+    </select>
+  </div>
+
+  <textarea [(ngModel)]="text" rows="10" style="width:100%; padding: 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+
+  <button (click)="submit()" [disabled]="isLoading || !text.trim()" style="margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+    <span *ngIf="isLoading">Processing...</span>
+    <span *ngIf="!isLoading">Run</span>
+  </button>
+
+  <div *ngIf="isLoading" style="margin-top: 20px; padding: 15px; background-color: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px; display: flex; align-items: center;">
+    <div style="border: 3px solid #f3f3f3; border-top: 3px solid #007bff; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; margin-right: 10px;"></div>
+    <span style="color: #856404;">Working, please wait...</span>
+  </div>
+
+  <div *ngIf="error" style="margin-top:12px; color: #b00020; font-weight:600;">{{ error }}</div>
+
+  <div *ngIf="result" style="margin-top: 20px; padding: 15px; background-color: #f8f9fa; border-left: 4px solid #007bff; border-radius: 4px;">
+    <h3 style="margin-top: 0;">Result:</h3>
+    <div style="white-space: pre-wrap; line-height: 1.6; font-family: Arial, sans-serif;">{{ result }}</div>
+  </div>
+
+</div>
+
+<style>
+@keyframes spin { from { transform: rotate(0deg);} to { transform: rotate(360deg);} }
+</style>
+
